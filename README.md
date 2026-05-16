@@ -2,7 +2,10 @@
 
 An interactive web app to explore and view the files in a directory using a modern calendar with a histogram.
 
-![License](https://img.shields.io/badge/license-MIT-green)
+
+![alt text](https://github.com/technovieux/file-calendar-viewer/files/image.png "Banner")
+
+
 ![Python](https://img.shields.io/badge/python-3.6%2B-blue)
 ![HTML5](https://img.shields.io/badge/HTML5-100%25-orange)
 
