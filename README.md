@@ -3,7 +3,7 @@
 An interactive web app to explore and view the files in a directory using a modern calendar with a histogram.
 
 
-![alt text](https://github.com/technovieux/file-calendar-viewer/files/image.png "Banner")
+![alt text](https://github.com/technovieux/file-calendar-viewer/blob/main/files/image.png "Banner")
 
 
 ![Python](https://img.shields.io/badge/python-3.6%2B-blue)
