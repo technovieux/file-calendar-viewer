@@ -1,0 +1,471 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* En-tête */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-bottom: 3px solid #667eea;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.histogram-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.histogram-container h2 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.histogram {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 60px;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.bar {
+    flex: 1;
+    background: linear-gradient(to top, #4CAF50, #8BC34A);
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.bar:hover {
+    filter: brightness(1.2);
+    transform: scaleY(1.05);
+}
+
+.bar-label {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    white-space: nowrap;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.bar-value {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+/* Zone principale */
+.main-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    gap: 0;
+}
+
+/* Panneau calendrier */
+.calendar-panel {
+    width: 28%;
+    background: #f8f9fa;
+    border-right: 1px solid #e0e0e0;
+    padding: 25px;
+    overflow-y: auto;
+}
+
+/* Panneau fichiers du jour */
+.files-panel {
+    width: 22%;
+    background: #f8f9fa;
+    border-right: 1px solid #e0e0e0;
+    padding: 25px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.files-panel h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.day-info {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.files-list-column {
+    list-style: none;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.files-list-column li {
+    padding: 12px;
+    margin: 8px 0;
+    background: white;
+    border-radius: 5px;
+    border-left: 3px solid #667eea;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9em;
+}
+
+.files-list-column li:hover {
+    background: #e3f2fd;
+    transform: translateX(5px);
+}
+
+.files-list-column li.active {
+    background: #667eea;
+    color: white;
+    border-left-color: #764ba2;
+}
+
+.calendar-panel h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.calendar-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.calendar-controls h3 {
+    flex: 1;
+    text-align: center;
+    color: #667eea;
+    font-size: 1.1em;
+}
+
+.nav-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background 0.3s;
+}
+
+.nav-btn:hover {
+    background: #764ba2;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 5px;
+    font-size: 0.9em;
+    position: relative;
+}
+
+.calendar-day:hover {
+    background: #e3f2fd;
+    border-color: #667eea;
+}
+
+.calendar-day.empty {
+    background: transparent;
+    border: none;
+    cursor: default;
+}
+
+.calendar-day.empty:hover {
+    background: transparent;
+}
+
+.calendar-day.today {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+    font-weight: bold;
+}
+
+.calendar-day.has-files {
+    border: 2px solid #4CAF50;
+    font-weight: bold;
+}
+
+.calendar-day .day-number {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.calendar-day .file-indicators {
+    display: flex;
+    gap: 2px;
+    margin-top: 3px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.file-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    font-size: 0.6em;
+}
+
+.files-legend {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.files-legend h4 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 0.95em;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+    font-size: 0.9em;
+}
+
+.legend-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+}
+
+/* Panneau visionneuse */
+.viewer-panel {
+    flex: 1;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background: white;
+}
+
+.file-info {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.file-info h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.file-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    font-size: 0.9em;
+}
+
+.detail-item {
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 3px solid #667eea;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: #667eea;
+    font-size: 0.85em;
+}
+
+.detail-value {
+    color: #333;
+    margin-top: 5px;
+}
+
+.file-preview {
+    background: #f8f9fa;
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    overflow: auto;
+    flex: 1;
+}
+
+.file-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.file-preview iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+}
+
+.placeholder {
+    color: #999;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+
+
+.file-icon {
+    font-size: 1.2em;
+}
+
+/* Couleurs par type de fichier */
+.pdf { --color: #E74C3C; }
+.jpg { --color: #3498DB; }
+.jpeg { --color: #9B59B6; }
+.png { --color: #27AE60; }
+.doc { --color: #F39C12; }
+.txt { --color: #95A5A6; }
+
+.file-type-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color, #667eea);
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #764ba2;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .files-panel {
+        display: none;
+    }
+    
+    .calendar-panel {
+        width: 35%;
+    }
+    
+    .viewer-panel {
+        width: 65%;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    .calendar-panel,
+    .files-panel {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .viewer-panel {
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .histogram {
+        height: 80px;
+    }
+
+    .header {
+        padding: 15px;
+    }
+
+    .calendar-panel,
+    .viewer-panel {
+        padding: 15px;
+    }
+}

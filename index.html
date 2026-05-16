@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Viewer & Calendar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header with histogram -->
+        <header class="header">
+            <div class="histogram-container">
+                <h2>Files by Date</h2>
+                <div class="histogram" id="histogram"></div>
+            </div>
+        </header>
+
+        <!-- Main zone -->
+        <div class="main-content">
+            <!-- Calendar - Column 1 -->
+            <aside class="calendar-panel">
+                <h2>Calendar</h2>
+                <div class="calendar-controls">
+                    <button id="prevMonth" class="nav-btn">&larr;</button>
+                    <h3 id="currentMonth"></h3>
+                    <button id="nextMonth" class="nav-btn">&rarr;</button>
+                </div>
+                <div class="calendar" id="calendar"></div>
+                <div class="files-legend">
+                    <h4>Legend</h4>
+                    <div id="legend"></div>
+                </div>
+            </aside>
+
+            <!-- Files of the Day - Column 2 -->
+            <section class="files-panel">
+                <h2>Files of the Day</h2>
+                <div class="day-info">
+                    <p id="selectedDayInfo" style="margin: 10px 0; color: #667eea; font-weight: bold;">Select a day</p>
+                </div>
+                <ul id="filesList" class="files-list-column"></ul>
+            </section>
+
+            <!-- Viewer - Column 3 -->
+            <section class="viewer-panel">
+                <div class="file-info">
+                    <h2 id="fileName">No file</h2>
+                    <div id="fileDetails" class="file-details"></div>
+                </div>
+                <div class="file-preview" id="filePreview">
+                    <p class="placeholder">Select a file</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
